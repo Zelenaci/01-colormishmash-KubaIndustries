@@ -1,41 +1,82 @@
 #!/usr/bin/env python3
+#!/usr/bin/env python3
 
 from os.path import basename, splitext
 import tkinter as tk
+from tkinter import Label, Button, Scale, HORIZONTAL, Canvas, Frame, Entry, LEFT, S, StringVar
+from typing import Text
 
 # from tkinter import ttk
 
 
-class About(tk.Toplevel):
-    def __init__(self, parent):
-        super().__init__(parent, class_=parent.name)
-        self.config()
-
-        btn = tk.Button(self, text="Konec", command=self.close)
-        btn.pack()
-
-    def close(self):
-        self.destroy()
 
 
 class Application(tk.Tk):
     name = basename(splitext(basename(__file__.capitalize()))[0])
-    name = "Foo"
+    name = "COlor mishmash"
 
     def __init__(self):
         super().__init__(className=self.name)
         self.title(self.name)
         self.bind("<Escape>", self.quit)
-        self.lbl = tk.Label(self, text="Hello World")
-        self.lbl.pack()
+        ###     R
+        self.varR=StringVar()
+        self.varR.trace("w", self.change)
+        self.frameR = Frame(self)
+        self.frameR.pack()
+        self.lblR = tk.Label(self.frameR, text="R")
+        self.lblR.pack(side=LEFT, anchor=S)
+        self.scaleR = Scale(self.frameR, from_=0, to=255, orient=HORIZONTAL, length=500, variable=self.varR)
+        
+        self.scaleR.pack(side=LEFT, anchor=S)
+        
+        self.entryR = Entry(self.frameR, width=5, textvariable=self.varR)
+        self.entryR.pack(side=LEFT, anchor=S)
+        ###     G
+        self.varG=StringVar()
+        self.varR.trace("w", self.change)
+        self.frameG = Frame(self)
+        self.frameG.pack()
+        self.lblG = tk.Label(self.frameG, text="G")
+        self.lblG.pack(side=LEFT, anchor=S)
+        self.scaleG = Scale(self.frameG, from_=0, to=255, orient=HORIZONTAL, length=500, variable=self.varG)
+        
+        self.scaleG.pack(side=LEFT, anchor=S)
+        
+        self.entryG = Entry(self.frameG, width=5, textvariable=self.varG)
+        self.entryG.pack(side=LEFT, anchor=S)
+        ###     B
+        self.varB=StringVar()
+        self.varR.trace("w", self.change)
+        self.frameB = Frame(self)
+        self.frameB.pack()
+        self.lblB = tk.Label(self.frameB, text="B")
+        self.lblB.pack(side=LEFT, anchor=S)
+        self.scaleB = Scale(self.frameB, from_=0, to=255, orient=HORIZONTAL, length=500, variable=self.varB)
+        
+        self.scaleB.pack(side=LEFT, anchor=S)
+        
+        self.entryB = Entry(self.frameB, width=5, textvariable=self.varB)
+        self.entryB.pack(side=LEFT, anchor=S)
+
+        self.canvasmain = Canvas(width=600, height=100, background='#000000')
+        self.canvasmain.pack()
+
         self.btn = tk.Button(self, text="Quit", command=self.quit)
         self.btn.pack()
-        self.btn2 = tk.Button(self, text="About", command=self.about)
-        self.btn2.pack()
 
-    def about(self):
-        window = About(self)
-        window.grab_set()
+        
+    def change(self, event, a, b):
+        r = self.scaleR.get()
+        g = self.scaleG.get()
+        b = self.scaleB.get()
+        self.canvasmain.config(background=f'#{r:02x}{g:02x}{b:02x}')
+
+        #self.varR.set(r)
+        #self.varG.set(g)
+        #self.varB.set(b)
+
+
 
     def quit(self, event=None):
         super().quit()
@@ -43,3 +84,4 @@ class Application(tk.Tk):
 
 app = Application()
 app.mainloop()
+
