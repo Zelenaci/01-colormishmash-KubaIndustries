@@ -4,8 +4,10 @@ from os.path import basename, splitext
 import tkinter as tk
 from tkinter import Label, Button, Scale, Canvas
 
+#Jakub Tichý
+
 from tkinter import HORIZONTAL, LEFT, Frame, Entry, Canvas, S, StringVar, IntVar
-#dominik slehofer
+
 # from tkinter import ttk
 
 class Application(tk.Tk):
