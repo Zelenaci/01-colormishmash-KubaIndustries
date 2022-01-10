@@ -132,7 +132,8 @@ class Application(tk.Tk):
         self.canvasMain.config(background=color)#0 před 2 říká:vyplň prázdné místo nulami, 
         self.varMain.set(color)
       
-
+    def canvasColor2Slids(self, canvas):
+        color = canvas.cget("background")
 
     def quit(self, event=None):
         super().quit()
@@ -140,4 +141,3 @@ class Application(tk.Tk):
 
 app = Application()
 app.mainloop()
-
