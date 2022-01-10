@@ -120,6 +120,9 @@ class Application(tk.Tk):
             self.config(cursor="")
             event.widget.config(background=self.color)
 
+            if event.widget is self.canvasMain:
+                self.canvasColor2Slids(self.canvasMain)
+
     def change(self, var, index, mode):
         #self.lblG.config(text="ahoj")
 
@@ -134,6 +137,13 @@ class Application(tk.Tk):
       
     def canvasColor2Slids(self, canvas):
         color = canvas.cget("background")
+        r = int(color[1:3], 16)
+        g = int(color[3:5], 16)
+        b = int(color[5:], 16)
+        self.varR.set(r)
+        self.varG.set(g)
+        self.varB.set(b)
+        self.change
 
     def quit(self, event=None):
         super().quit()
