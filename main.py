@@ -158,13 +158,20 @@ class Application(tk.Tk):
 
 
     def colorLoad(self):
-        with open("colors.txt", "r") as f:
-          colorcode = f.readline().strip()
-          self.canvasMain.config(background=colorcode)
-          self.canvasColor2Slids(self.canvasMain)
-          for canvas in self.canvasMem:
-              colorcode = f.readline().strip()
-              canvas.config(background=colorcode)  
+        try:
+            with open("colors.txt", "r") as f:
+                colorcode = f.readline().strip()
+                self.canvasMain.config(background=colorcode)
+                self.canvasColor2Slids(self.canvasMain)
+                for canvas in self.canvasMem:
+                    colorcode = f.readline().strip()
+                    canvas.config(background=colorcode)  
+
+        except FileExistsError:
+            print("Průser! Nepodařilo se načíst soubor barev.")
+
+        except:
+            print("Jejda! Soubor má špatný formát")
 
     def quit(self, event=None):
         self.colorSave()
