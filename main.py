@@ -161,7 +161,10 @@ class Application(tk.Tk):
         with open("colors.txt", "r") as f:
           colorcode = f.readline().strip()
           self.canvasMain.config(background=colorcode)
-          self.canvasColor2Slids(self.canvasMain)  
+          self.canvasColor2Slids(self.canvasMain)
+          for canvas in self.canvasMem:
+              colorcode = f.readline().strip()
+              canvas.config(background=colorcode)  
 
     def quit(self, event=None):
         self.colorSave()
